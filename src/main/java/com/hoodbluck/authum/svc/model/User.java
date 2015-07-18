@@ -18,9 +18,7 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @JsonIgnore
-    private int id;
-    private String userId;
+    private int userId;
     private String firstName;
     private String lastName;
     private String email;
@@ -30,7 +28,7 @@ public class User {
     public User() {
     }
 
-    public User(String userId, String firstName, String lastName, String email, String password, String deviceToken) {
+    public User(int userId, String firstName, String lastName, String email, String password, String deviceToken) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,19 +37,11 @@ public class User {
         this.deviceToken = deviceToken;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

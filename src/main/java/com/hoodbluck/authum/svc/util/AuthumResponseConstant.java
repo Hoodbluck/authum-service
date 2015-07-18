@@ -7,6 +7,11 @@ package com.hoodbluck.authum.svc.util;
  */
 public interface AuthumResponseConstant {
     /**
+     * This is a code sent for a user registration that is already
+     * registered. Code will be -1.
+     */
+    String STATUS_REGISTRATION_DUPLICATED = "user_already_registered";
+    /**
      * This is a code sent for invalid login. Code will be -1.
      */
     String STATUS_LOGIN_INVALID = "login_invalid";

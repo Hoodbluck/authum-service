@@ -5,6 +5,8 @@ import com.hoodbluck.authum.svc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created on 7/18/15.
  *
@@ -22,7 +24,7 @@ public class UserDataProvider {
      * @return the saved user.
      */
     public User saveUser(User user) {
-        return user;
+        return mUserProvider.save(user);
     }
 
     /**
@@ -31,6 +33,10 @@ public class UserDataProvider {
      * @return the found user.
      */
     public User getUser(String email) {
+        List<User> users = mUserProvider.findByEmail(email);
+        if(users != null && !users.isEmpty()) {
+            return users.get(0);
+        }
         return null;
     }
 }
