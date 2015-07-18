@@ -2,7 +2,6 @@ package com.hoodbluck.authum.svc.controller;
 
 import com.hoodbluck.authum.svc.manager.UserManager;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
-import com.hoodbluck.authum.svc.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
