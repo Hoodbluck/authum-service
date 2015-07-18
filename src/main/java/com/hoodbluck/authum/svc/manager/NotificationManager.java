@@ -23,7 +23,7 @@ public class NotificationManager {
         if(user != null) {
             Notificator notificator = NotificatorFactory.getNotificator(user.getUserAgent());
             if(notificator != null) {
-                notificator.notifyUser(null, message);
+                notificator.notifyUser(user, message);
                 return "Notification: " + message;
             }
         }
