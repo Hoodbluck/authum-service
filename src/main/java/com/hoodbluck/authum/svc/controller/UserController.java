@@ -6,6 +6,7 @@ import com.hoodbluck.authum.svc.model.AuthumResponse;
 import com.hoodbluck.authum.svc.model.User;
 import com.hoodbluck.authum.svc.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -23,7 +24,8 @@ public class UserController {
     UserManager mUserManager;
 
     @RequestMapping(
-            method = RequestMethod.POST
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public AuthumResponse register(@RequestBody String userContent) {
         try {
