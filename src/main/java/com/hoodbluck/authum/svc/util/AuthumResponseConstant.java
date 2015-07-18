@@ -7,11 +7,15 @@ package com.hoodbluck.authum.svc.util;
  */
 public interface AuthumResponseConstant {
     /**
-     * This is a code sent for server errors. Status will be -1.
+     * This is a code sent for invalid login. Code will be -1.
+     */
+    String STATUS_LOGIN_INVALID = "login_invalid";
+    /**
+     * This is a code sent for server errors. Code will be -1.
      */
     String STATUS_SERVER_ERROR = "server_error";
     /**
-     * This is a code sent for default success actions. Status will be 1.
+     * This is a code sent for default success actions. Code will be 1.
      */
     String STATUS_SUCCESS = "success";
     /**
