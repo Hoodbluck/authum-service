@@ -16,7 +16,22 @@ public class UserDataProvider {
     @Autowired
     UserRepository mUserProvider;
 
-    public User registerUser(User user) {
+    /**
+     * Saves a user.
+     * @param user the user to save
+     * @return the saved user.
+     */
+    public User saveUser(User user) {
         return user;
+    }
+
+    /**
+     * Gets a user through his email and password.
+     * @param email the user's email
+     * @param password the user's password
+     * @return the found user.
+     */
+    public User getUser(String email, String password) {
+        return null;
     }
 }

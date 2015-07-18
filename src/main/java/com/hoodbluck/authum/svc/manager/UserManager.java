@@ -25,4 +25,14 @@ public class UserManager {
     public AuthumResponse registerUser(User user) {
         return null;
     }
+
+    /**
+     * Validates user credentials against the Authum's service.
+     * @param email the user's email.
+     * @param password the user's password.
+     * @return an AuthumResponse for login.
+     */
+    public AuthumResponse login(String email, String password) {
+        return null;
+    }
 }
