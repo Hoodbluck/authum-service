@@ -1,6 +1,7 @@
 package com.hoodbluck.authum.svc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hoodbluck.authum.svc.manager.NotificationManager;
 import com.hoodbluck.authum.svc.manager.UserManager;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
 import com.hoodbluck.authum.svc.model.User;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     UserManager mUserManager;
+
+    @Autowired
+    NotificationManager mNotificationManager;
 
     @RequestMapping(
             method = RequestMethod.POST,
@@ -68,5 +72,18 @@ public class UserController {
     )
     public List<User> getAll() {
         return mUserManager.getAllUsers();
+    }
+
+    @RequestMapping(
+            value = "/{userId}/notify",
+            method = RequestMethod.GET
+    )
+    public String notifyUser(@PathVariable("userId") String userId) {
+        try {
+            int parsedUserId = Integer.parseInt(userId);
+            return mNotificationManager.notifyUser(parsedUserId, "This is a test message from Authum!");
+        } catch(NumberFormatException e) {
+            return e.getMessage();
+        }
     }
 }
