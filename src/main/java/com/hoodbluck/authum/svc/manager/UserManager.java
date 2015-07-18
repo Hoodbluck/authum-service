@@ -66,6 +66,25 @@ public class UserManager {
     }
 
     /**
+     * Updates the given user (through the received userId) device token.
+     * @param userId the user's id.
+     * @param deviceToken the user's device token
+     * @return an AuthumResponse for updating the user's device token.
+     */
+    public AuthumResponse updateUserDeviceToken(int userId, String deviceToken) {
+        if(StringHelper.isEmpty(deviceToken)) {
+            return ResponseUtil.createFailureResponse(AuthumResponseConstant.STATUS_DEVICE_TOKEN_INVALID, "The device token is invalid.");
+        }
+        User user = mUserDataProvider.getUser(userId);
+        if(user != null) {
+            user.setDeviceToken(deviceToken);
+            mUserDataProvider.saveUser(user);
+            return ResponseUtil.createSuccessResponse("The user device token is updated.");
+        }
+        return ResponseUtil.createFailureResponse(AuthumResponseConstant.STATUS_USER_INVALID_ID, "The user id is invalid.");
+    }
+
+    /**
      * Validates the given user.
      * @param user the user to validate.
      * @throws AuthumException if the user is invalid.
@@ -73,12 +92,14 @@ public class UserManager {
     private void validateUser(User user) throws AuthumException {
         String errorValue = "";
         if(user != null) {
-            if(StringHelper.isEmpty(user.getEmail()) || StringHelper.isEmpty(user.getPassword())) {
+            if(StringHelper.isEmpty(user.getEmail())
+                    || StringHelper.isEmpty(user.getPassword())) {
                 errorValue = "The user credentials are empty.";
             }
 
-            if(StringHelper.isEmpty(user.getDeviceToken())) {
-                errorValue = "The user device token is empty.";
+            if(StringHelper.isEmpty(user.getFirstName())
+                    || StringHelper.isEmpty(user.getLastName())) {
+                errorValue = "The user's information is empty.";
             }
         } else {
             errorValue = "The user object is empty.";

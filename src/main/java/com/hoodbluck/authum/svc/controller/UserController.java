@@ -45,4 +45,18 @@ public class UserController {
                                 @RequestParam("password") String password) {
         return mUserManager.login(user, password);
     }
+
+    @RequestMapping(
+            value = "/{userId}/deviceToken",
+            method = RequestMethod.POST
+    )
+    public AuthumResponse updateDeviceToken(@PathVariable("userId") String userId,
+                                @RequestParam("deviceToken") String deviceToken) {
+        try {
+            int parsedUserId = Integer.parseInt(userId);
+            return mUserManager.updateUserDeviceToken(parsedUserId, deviceToken);
+        } catch(NumberFormatException e) {
+            return ResponseUtil.createServerErrorResponse(e.getMessage());
+        }
+    }
 }

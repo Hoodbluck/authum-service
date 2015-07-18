@@ -7,6 +7,16 @@ package com.hoodbluck.authum.svc.util;
  */
 public interface AuthumResponseConstant {
     /**
+     * This is a status sent when the received deviceToken is wrong.
+     * Code will be -1.
+     */
+    String STATUS_DEVICE_TOKEN_INVALID = "device_token_invalid";
+    /**
+     * This is a status sent when the received userId is wrong.
+     * Code will be -1.
+     */
+    String STATUS_USER_INVALID_ID = "user_invalid_id";
+    /**
      * This is a status sent when the user for registering is invalid.
      */
     String STATUS_REGISTRATION_INVALID = "user_invalid";

@@ -28,7 +28,7 @@ public class UserDataProvider {
     }
 
     /**
-     * Gets a user through his email.
+     * Gets a user through its email.
      * @param email the user's email
      * @return the found user.
      */
@@ -38,5 +38,14 @@ public class UserDataProvider {
             return users.get(0);
         }
         return null;
+    }
+
+    /**
+     * Gets a user through its id.
+     * @param userId the user's id.
+     * @return the user if found.
+     */
+    public User getUser(int userId) {
+        return mUserProvider.getOne(userId);
     }
 }
