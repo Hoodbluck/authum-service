@@ -15,6 +15,12 @@ public class AuthumResponse {
     public AuthumResponse() {
     }
 
+    public AuthumResponse(int code, String status, String value) {
+        this.code = code;
+        this.status = status;
+        this.value = value;
+    }
+
     public int getCode() {
         return code;
     }
