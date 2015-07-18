@@ -11,7 +11,6 @@ import com.hoodbluck.authum.svc.util.ResponseUtil;
 import com.hoodbluck.authum.svc.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * Created on 7/18/15.
@@ -73,7 +72,7 @@ public class UserManager {
      * @return an AuthumResponse for updating the user's device token.
      */
     public AuthumResponse updateUserDeviceToken(int userId, String deviceToken) {
-        if(StringUtils.isEmpty(deviceToken)) {
+        if(StringHelper.isEmpty(deviceToken)) {
             return ResponseUtil.createFailureResponse(AuthumResponseConstant.STATUS_DEVICE_TOKEN_INVALID, "The device token is invalid.");
         }
         User user = mUserDataProvider.getUser(userId);
