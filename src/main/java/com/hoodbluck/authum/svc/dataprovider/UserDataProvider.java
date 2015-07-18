@@ -26,12 +26,11 @@ public class UserDataProvider {
     }
 
     /**
-     * Gets a user through his email and password.
+     * Gets a user through his email.
      * @param email the user's email
-     * @param password the user's password
      * @return the found user.
      */
-    public User getUser(String email, String password) {
+    public User getUser(String email) {
         return null;
     }
 }

@@ -1,9 +1,14 @@
 package com.hoodbluck.authum.svc.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoodbluck.authum.svc.manager.UserManager;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
+import com.hoodbluck.authum.svc.model.User;
+import com.hoodbluck.authum.svc.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 /**
  * Created on 7/18/15.
@@ -20,8 +25,14 @@ public class UserController {
     @RequestMapping(
             method = RequestMethod.POST
     )
-    public AuthumResponse register(@RequestBody String user) {
-        return null;
+    public AuthumResponse register(@RequestBody String userContent) {
+        try {
+            //parse structure into object.
+            User user = new ObjectMapper().readValue(userContent, User.class);
+            return mUserManager.registerUser(user);
+        } catch (IOException e) {
+            return ResponseUtil.createFailureResponse(e.getMessage());
+        }
     }
 
     @RequestMapping(
@@ -30,6 +41,6 @@ public class UserController {
     )
     public AuthumResponse login(@RequestParam("user") String user,
                                 @RequestParam("password") String password) {
-        return null;
+        return mUserManager.login(user, password);
     }
 }
