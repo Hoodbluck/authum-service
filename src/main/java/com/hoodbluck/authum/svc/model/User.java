@@ -8,12 +8,12 @@ package com.hoodbluck.authum.svc.model;
  * @author Adrian Pena
  */
 public class User {
-    public String userId;
-    public String firstName;
-    public String lastName;
-    public String email;
-    public String password;
-    public String deviceToken;
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String deviceToken;
 
     public User() {
     }
