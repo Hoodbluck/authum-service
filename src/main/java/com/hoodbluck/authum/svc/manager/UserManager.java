@@ -73,12 +73,14 @@ public class UserManager {
     private void validateUser(User user) throws AuthumException {
         String errorValue = "";
         if(user != null) {
-            if(StringHelper.isEmpty(user.getEmail()) || StringHelper.isEmpty(user.getPassword())) {
+            if(StringHelper.isEmpty(user.getEmail())
+                    || StringHelper.isEmpty(user.getPassword())) {
                 errorValue = "The user credentials are empty.";
             }
 
-            if(StringHelper.isEmpty(user.getDeviceToken())) {
-                errorValue = "The user device token is empty.";
+            if(StringHelper.isEmpty(user.getFirstName())
+                    || StringHelper.isEmpty(user.getLastName())) {
+                errorValue = "The user's information is empty.";
             }
         } else {
             errorValue = "The user object is empty.";
