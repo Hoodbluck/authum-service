@@ -6,10 +6,12 @@ import com.hoodbluck.authum.svc.model.AuthumResponse;
 import com.hoodbluck.authum.svc.model.User;
 import com.hoodbluck.authum.svc.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created on 7/18/15.
@@ -27,10 +29,11 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public AuthumResponse register(@RequestBody String userContent) {
+    public AuthumResponse register(@RequestHeader(HttpHeaders.USER_AGENT) String userAgent, @RequestBody String userContent) {
         try {
             //parse structure into object.
             User user = new ObjectMapper().readValue(userContent, User.class);
+            user.setUserAgent(userAgent);
             return mUserManager.registerUser(user);
         } catch (IOException e) {
             return ResponseUtil.createFailureResponse(e.getMessage());
@@ -58,5 +61,12 @@ public class UserController {
         } catch(NumberFormatException e) {
             return ResponseUtil.createServerErrorResponse(e.getMessage());
         }
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET
+    )
+    public List<User> getAll() {
+        return mUserManager.getAllUsers();
     }
 }
