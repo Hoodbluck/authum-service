@@ -11,7 +11,6 @@ import com.hoodbluck.authum.svc.util.ResponseUtil;
 import com.hoodbluck.authum.svc.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * Created on 7/18/15.
