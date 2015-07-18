@@ -48,4 +48,12 @@ public class UserDataProvider {
     public User getUser(int userId) {
         return mUserProvider.getOne(userId);
     }
+
+    /**
+     * Gets all the stored users
+     * @return the list of users.
+     */
+    public List<User> getUsers() {
+        return mUserProvider.findAll();
+    }
 }

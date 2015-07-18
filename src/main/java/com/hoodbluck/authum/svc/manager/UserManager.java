@@ -12,6 +12,8 @@ import com.hoodbluck.authum.svc.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created on 7/18/15.
  *
@@ -108,5 +110,13 @@ public class UserManager {
         if(StringHelper.isNotEmpty(errorValue)) {
             throw new AuthumException(AuthumResponseConstant.STATUS_REGISTRATION_INVALID, errorValue);
         }
+    }
+
+    /**
+     * Gets all the users.
+     * @return the list of users.
+     */
+    public List<User> getAllUsers() {
+        return mUserDataProvider.getUsers();
     }
 }
