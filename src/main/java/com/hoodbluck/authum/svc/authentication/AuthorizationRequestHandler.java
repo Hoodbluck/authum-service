@@ -4,7 +4,6 @@ import com.hoodbluck.authum.svc.model.Client;
 import com.hoodbluck.authum.svc.model.User;
 import com.hoodbluck.authum.svc.util.StringHelper;
 
-import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -30,15 +29,14 @@ public class AuthorizationRequestHandler {
 
     public void notifyAuthenticationResponse(User user, Client client, boolean authenticated) {
         System.out.println("Notification received for: " + user.getUserId() + " @ " + client.getClientId() + " starting to look for a listener...");
-        Iterator<AuthorizationRequestListener> iterator = mRequestListeners.iterator();
-        while(iterator.hasNext()) {
-            AuthorizationRequestListener listener = iterator.next();
+        for(AuthorizationRequestListener listener : mRequestListeners) {
             if (StringHelper.equals(user.getEmail(), listener.getUser().getEmail())
                     && StringHelper.equals(client.getClientId(), listener.getClient().getClientId())) {
                 System.out.println("Found a listener for: " + user.getUserId() + " @ " + client.getClientId() + " starting to handle response...");
                 listener.handleResponse(authenticated);
                 System.out.println("Handled authentication response for " + user.getUserId() + " @ " + client.getClientId());
-                iterator.remove();
+                mRequestListeners.remove(listener);
+                return;
             }
         }
     }
