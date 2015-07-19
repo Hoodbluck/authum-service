@@ -25,6 +25,7 @@ public class User {
     private String email;
     private String password;
     private String deviceToken;
+    @JsonIgnore
     private String userAgent;
 
     public User() {

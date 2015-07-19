@@ -46,7 +46,7 @@ public class UserDataProvider {
      * @return the user if found.
      */
     public User getUser(int userId) {
-        return mUserProvider.getOne(userId);
+        return mUserProvider.findOne(userId);
     }
 
     /**

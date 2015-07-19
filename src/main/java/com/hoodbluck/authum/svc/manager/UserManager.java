@@ -1,8 +1,11 @@
 package com.hoodbluck.authum.svc.manager;
 
+import com.hoodbluck.authum.svc.authentication.AuthorizationRequestHandler;
+import com.hoodbluck.authum.svc.dataprovider.ClientDataProvider;
 import com.hoodbluck.authum.svc.dataprovider.UserDataProvider;
 import com.hoodbluck.authum.svc.exception.AuthumException;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
+import com.hoodbluck.authum.svc.model.Client;
 import com.hoodbluck.authum.svc.model.User;
 import com.hoodbluck.authum.svc.util.AuthumResponseConstant;
 import com.hoodbluck.authum.svc.util.ResponseUtil;
@@ -22,6 +25,12 @@ public class UserManager {
 
     @Autowired
     UserDataProvider mUserDataProvider;
+
+    @Autowired
+    ClientDataProvider mClientDataProvider;
+
+    @Autowired
+    NotificationManager mNotificationManager;
 
     /**
      * Registers a user in the Authum service.
@@ -106,5 +115,41 @@ public class UserManager {
      */
     public List<User> getAllUsers() {
         return mUserDataProvider.getUsers();
+    }
+
+    /**
+     * Responds an authorization request.
+     * @param userEmail the userId of the responding user.
+     * @param authorized true if access is authorized
+     */
+    public void respondAuthorization(String userEmail, String clientId, boolean authorized) {
+        User user = mUserDataProvider.getUser(userEmail);
+        Client client = mClientDataProvider.getClient(clientId);
+        if(user != null && client != null) {
+            respondAuthorization(user, client, authorized);
+        }
+    }
+
+    /**
+     * Responds an authorization request.
+     * @param userId the userId of the responding user.
+     * @param authorized true if access is authorized
+     */
+    public void respondAuthorization(int userId, String clientId, boolean authorized) {
+        User user = mUserDataProvider.getUser(userId);
+        Client client = mClientDataProvider.getClient(clientId);
+        if(user != null && client != null) {
+            respondAuthorization(user, client, authorized);
+        }
+    }
+
+    /**
+     * Responds an authorization request.
+     * @param user the responding user.
+     * @param authorized true if access is authorized
+     */
+    public void respondAuthorization(User user, Client client, boolean authorized) {
+        AuthorizationRequestHandler handler = new AuthorizationRequestHandler();
+        handler.notifyAuthenticationResponse(user, client, authorized);
     }
 }

@@ -86,4 +86,25 @@ public class UserController {
             return e.getMessage();
         }
     }
+
+    @RequestMapping(
+            value = "/{userId}/client/{clientId}/auth",
+            method = RequestMethod.POST
+    )
+    public void respondAuthorizationByUserId(@PathVariable("userId") String userId, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
+        try {
+            int parsedUserId = Integer.parseInt(userId);
+            mUserManager.respondAuthorization(parsedUserId, clientId, authorized);
+        } catch(NumberFormatException e) {
+            //NOP
+        }
+    }
+
+    @RequestMapping(
+            value = "/{userEmail}/client/{clientId}/auth",
+            method = RequestMethod.POST
+    )
+    public void respondAuthorizationByUserEmail(@PathVariable("userEmail") String userEmail, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
+        mUserManager.respondAuthorization(userEmail, clientId, authorized);
+    }
 }
