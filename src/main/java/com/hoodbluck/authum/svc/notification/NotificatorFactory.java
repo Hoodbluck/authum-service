@@ -14,11 +14,10 @@ public class NotificatorFactory {
     private NotificatorFactory() {}
 
     public static Notificator getNotificator(String userAgent) {
-        if(StringHelper.equals(userAgent, USER_AGENT_IOS)) {
-            return new AppleNotificator();
-        } else if(StringHelper.equals(userAgent, USER_AGENT_ANDROID)) {
+        if(StringHelper.equals(userAgent, USER_AGENT_ANDROID)) {
             return new GoogleNotificator();
         }
-        return new GoogleNotificator();
+        //not checking user agent ios because the swift network library (AlamoFire) has an issue with headers.
+        return new AppleNotificator();
     }
 }
