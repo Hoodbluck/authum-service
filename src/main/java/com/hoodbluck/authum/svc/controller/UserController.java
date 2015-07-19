@@ -80,12 +80,13 @@ public class UserController {
 
     @RequestMapping(
             value = "/{userId}/client/{clientId}/auth/{authorized}",
-            method = RequestMethod.POST
+            method = RequestMethod.GET
     )
-    public void respondAuthorizationByUserId(@PathVariable("userId") int userId, @PathVariable("clientId") String clientId, @PathVariable("authorized") String authorized) {
+    public String respondAuthorizationByUserId(@PathVariable("userId") int userId, @PathVariable("clientId") String clientId, @PathVariable("authorized") String authorized) {
         boolean authorizedB = StringHelper.equals(authorized, "1");
         System.out.println("respondAuthorizationByUserId: " + userId + " clientId " + clientId + " authorized " + authorizedB);
         mUserManager.respondAuthorization(userId, clientId, authorizedB);
+        return "responded";
     }
 
     @RequestMapping(
