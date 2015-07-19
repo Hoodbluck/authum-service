@@ -28,7 +28,7 @@ public class AppleNotificator implements Notificator {
     @Override
     public void notifyUser(User user, Client client, String message) {
         try {
-            APNSPayload apnsPayload = new APNSPayload(new APS(message, APNS_PAYLOAD_CATEGORY), client.getClientId());
+            APNSPayload apnsPayload = new APNSPayload(new APS(message, APNS_PAYLOAD_CATEGORY, "default"), client.getClientId());
             String payloadValue = new ObjectMapper().writeValueAsString(apnsPayload);
             Payload payload = new Payload(payloadValue){};
             PushedNotifications response = Push.payload(payload, KEY_STORE, PASSPHRASE, false, user.getDeviceToken());
