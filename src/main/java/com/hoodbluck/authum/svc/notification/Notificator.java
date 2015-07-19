@@ -1,5 +1,6 @@
 package com.hoodbluck.authum.svc.notification;
 
+import com.hoodbluck.authum.svc.model.Client;
 import com.hoodbluck.authum.svc.model.User;
 
 /**
@@ -8,5 +9,5 @@ import com.hoodbluck.authum.svc.model.User;
  * @author Adrian Pena
  */
 public interface Notificator {
-    void notifyUser(User user, String message);
+    void notifyUser(User user, Client client, String message);
 }

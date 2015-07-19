@@ -7,12 +7,14 @@ package com.hoodbluck.authum.svc.notification.model;
  */
 public class APNSPayload {
     private APS aps;
+    private String clientId;
 
     public APNSPayload() {
     }
 
-    public APNSPayload(APS aps) {
+    public APNSPayload(APS aps, String clientId) {
         this.aps = aps;
+        this.clientId = clientId;
     }
 
     public APS getAps() {
@@ -21,5 +23,13 @@ public class APNSPayload {
 
     public void setAps(APS aps) {
         this.aps = aps;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

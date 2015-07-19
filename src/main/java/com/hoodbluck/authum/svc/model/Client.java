@@ -17,6 +17,11 @@ public class Client {
     public Client() {
     }
 
+    public Client(String clientId, String name) {
+        this.clientId = clientId;
+        this.name = name;
+    }
+
     public String getClientId() {
         return clientId;
     }

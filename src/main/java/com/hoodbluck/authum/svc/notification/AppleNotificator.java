@@ -2,6 +2,7 @@ package com.hoodbluck.authum.svc.notification;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hoodbluck.authum.svc.model.Client;
 import com.hoodbluck.authum.svc.model.User;
 import com.hoodbluck.authum.svc.notification.model.APNSPayload;
 import com.hoodbluck.authum.svc.notification.model.APS;
@@ -25,9 +26,9 @@ public class AppleNotificator implements Notificator {
     AppleNotificator() {}
 
     @Override
-    public void notifyUser(User user, String message) {
+    public void notifyUser(User user, Client client, String message) {
         try {
-            APNSPayload apnsPayload = new APNSPayload(new APS(message, APNS_PAYLOAD_CATEGORY));
+            APNSPayload apnsPayload = new APNSPayload(new APS(message, APNS_PAYLOAD_CATEGORY), client.getClientId());
             String payloadValue = new ObjectMapper().writeValueAsString(apnsPayload);
             Payload payload = new Payload(payloadValue){};
             PushedNotifications response = Push.payload(payload, KEY_STORE, PASSPHRASE, false, user.getDeviceToken());

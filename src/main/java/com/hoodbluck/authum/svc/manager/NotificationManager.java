@@ -22,20 +22,20 @@ public class NotificationManager {
     public String notifyUser(int userId, String message) {
         User user = mUserDataProvider.getUser(userId);
         if(user != null) {
-            return notifyUser(user, message);
+            return notifyUser(user, new Client("test", "test"), message);
         }
         return null;
     }
 
     public String notifyUser(User user, Client client) {
         String messageFormat = "\"%s\" would like to authenticate.";
-        return notifyUser(user, String.format(messageFormat, client.getName()));
+        return notifyUser(user, client, String.format(messageFormat, client.getName()));
     }
 
-    public String notifyUser(User user, String message) {
+    public String notifyUser(User user, Client client, String message) {
         Notificator notificator = NotificatorFactory.getNotificator(user.getUserAgent());
         if(notificator != null) {
-            notificator.notifyUser(user, message);
+            notificator.notifyUser(user, client, message);
             return "Notification: " + message;
         }
         return null;
