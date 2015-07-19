@@ -8,10 +8,12 @@ package com.hoodbluck.authum.svc.notification.model;
 public class APS {
     private String alert;
     private String category;
+    private String sound;
 
-    public APS(String alert, String category) {
+    public APS(String alert, String category, String sound) {
         this.alert = alert;
         this.category = category;
+        this.sound = sound;
     }
 
     public APS() {
@@ -31,5 +33,13 @@ public class APS {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
     }
 }
