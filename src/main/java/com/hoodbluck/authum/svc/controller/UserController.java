@@ -84,6 +84,7 @@ public class UserController {
     )
     public void respondAuthorizationByUserId(@PathVariable("userId") int userId, @PathVariable("clientId") String clientId, @PathVariable("authorized") String authorized) {
         boolean authorizedB = StringHelper.equals(authorized, "1");
+        System.out.println("respondAuthorizationByUserId: " + userId + " clientId " + clientId + " authorized " + authorizedB);
         mUserManager.respondAuthorization(userId, clientId, authorizedB);
     }
 

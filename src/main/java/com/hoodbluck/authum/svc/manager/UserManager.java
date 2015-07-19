@@ -140,6 +140,8 @@ public class UserManager {
         Client client = mClientDataProvider.getClient(clientId);
         if(user != null && client != null) {
             respondAuthorization(user, client, authorized);
+        } else {
+            System.out.println("+++ USER OR CLIENT NOT FOUND +++");
         }
     }
 
