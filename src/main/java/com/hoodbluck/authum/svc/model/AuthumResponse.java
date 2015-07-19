@@ -7,15 +7,15 @@ package com.hoodbluck.authum.svc.model;
  * @see <a href="https://github.com/Hoodbluck/doc/wiki/Models#authumresponse">Authum's Model Page</a>
  * @author Adrian Pena
  */
-public class AuthumResponse {
+public class AuthumResponse<T> {
     private int code;
     private String status;
-    private String value;
+    private T value;
 
     public AuthumResponse() {
     }
 
-    public AuthumResponse(int code, String status, String value) {
+    public AuthumResponse(int code, String status, T value) {
         this.code = code;
         this.status = status;
         this.value = value;
@@ -37,11 +37,11 @@ public class AuthumResponse {
         this.status = status;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(T value) {
         this.value = value;
     }
 }

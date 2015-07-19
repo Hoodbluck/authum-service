@@ -1,7 +1,5 @@
 package com.hoodbluck.authum.svc.manager;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoodbluck.authum.svc.dataprovider.UserDataProvider;
 import com.hoodbluck.authum.svc.exception.AuthumException;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
@@ -40,12 +38,7 @@ public class UserManager {
             return ResponseUtil.createFailureResponse(AuthumResponseConstant.STATUS_REGISTRATION_DUPLICATED, "This email is already registered");
         }
         user = mUserDataProvider.saveUser(user);
-        try {
-            String userContent = new ObjectMapper().writeValueAsString(user);
-            return ResponseUtil.createSuccessResponse(userContent);
-        } catch (JsonProcessingException e) {
-            return ResponseUtil.createFailureResponse(e.getMessage());
-        }
+        return ResponseUtil.createSuccessResponse(user);
     }
 
     /**
@@ -57,12 +50,7 @@ public class UserManager {
     public AuthumResponse login(String email, String password) {
         User user = mUserDataProvider.getUser(email);
         if(user != null && StringHelper.equals(password, user.getPassword())) {
-            try {
-                String userContent = new ObjectMapper().writeValueAsString(user);
-                return ResponseUtil.createSuccessResponse(userContent);
-            } catch (JsonProcessingException e) {
-                return ResponseUtil.createFailureResponse(e.getMessage());
-            }
+            return ResponseUtil.createSuccessResponse(user);
         }
         return ResponseUtil.createFailureResponse(AuthumResponseConstant.STATUS_LOGIN_INVALID, "The user's email or password is wrong");
     }

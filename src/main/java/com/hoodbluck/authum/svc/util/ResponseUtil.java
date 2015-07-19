@@ -34,8 +34,8 @@ public class ResponseUtil {
      * @param value An error value.
      * @return a failure {@link AuthumResponse}
      */
-    public static AuthumResponse createFailureResponse(String status, String value) {
-        return new AuthumResponse(AuthumResponseConstant.CODE_FAILURE, status, value);
+    public static <T> AuthumResponse createFailureResponse(String status, T value) {
+        return new AuthumResponse<T>(AuthumResponseConstant.CODE_FAILURE, status, value);
     }
 
     /**
@@ -51,8 +51,8 @@ public class ResponseUtil {
      * @param value a success value.
      * @return a success {@link AuthumResponse}
      */
-    public static AuthumResponse createSuccessResponse(String value) {
-        return new AuthumResponse(AuthumResponseConstant.CODE_SUCCESS, AuthumResponseConstant.STATUS_SUCCESS, value);
+    public static <T> AuthumResponse createSuccessResponse(T value) {
+        return new AuthumResponse<T>(AuthumResponseConstant.CODE_SUCCESS, AuthumResponseConstant.STATUS_SUCCESS, value);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ResponseUtil {
      * @param value a warning value.
      * @return a warning {@link AuthumResponse}
      */
-    public static AuthumResponse createWarningResponse(String status, String value) {
-        return new AuthumResponse(AuthumResponseConstant.CODE_WARNING, status, value);
+    public static <T> AuthumResponse createWarningResponse(String status, T value) {
+        return new AuthumResponse<T>(AuthumResponseConstant.CODE_WARNING, status, value);
     }
 }
