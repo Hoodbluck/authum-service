@@ -2,6 +2,7 @@ package com.hoodbluck.authum.svc.notification;
 
 import com.hoodbluck.authum.svc.model.Client;
 import com.hoodbluck.authum.svc.model.User;
+import com.hoodbluck.authum.svc.notification.model.GCMPayload;
 import com.hoodbluck.authum.svc.notification.model.GCMRequest;
 import org.springframework.http.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -23,14 +24,14 @@ public class GoogleNotificator implements Notificator {
 
     @Override
     public void notifyUser(User user, Client client, String message) {
-        GCMRequest<String> request = createStringGCMRequest(user, message);
+        GCMRequest request = createStringGCMRequest(user, client, message);
         pushGCMNotification(request);
     }
 
-    private GCMRequest<String> createStringGCMRequest(User user, String message) {
+    private GCMRequest<GCMPayload> createStringGCMRequest(User user, Client client, String message) {
         List<String> registrationIds = new ArrayList<String>();
         registrationIds.add(user.getDeviceToken());
-        return new GCMRequest<String>(registrationIds, "message", message);
+        return new GCMRequest<GCMPayload>(registrationIds, "payload", new GCMPayload(message, client.getClientId()));
     }
 
     private void pushGCMNotification(GCMRequest request) {
