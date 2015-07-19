@@ -19,6 +19,6 @@ public class NotificatorFactory {
         } else if(StringHelper.equals(userAgent, USER_AGENT_ANDROID)) {
             return new GoogleNotificator();
         }
-        return new AppleNotificator();
+        return new GoogleNotificator();
     }
 }
