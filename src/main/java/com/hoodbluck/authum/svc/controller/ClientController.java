@@ -2,7 +2,6 @@ package com.hoodbluck.authum.svc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoodbluck.authum.svc.manager.ClientManager;
-import com.hoodbluck.authum.svc.manager.UserManager;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
 import com.hoodbluck.authum.svc.model.Client;
 import com.hoodbluck.authum.svc.util.ResponseUtil;
@@ -40,17 +39,12 @@ public class ClientController {
             value = "/{clientId}/user/{userId}/auth",
             method = RequestMethod.GET
     )
-    public AuthumResponse requestAuthorizationByUserId(@PathVariable("clientId") String clientId, @PathVariable("userId") String userId) {
-        try {
-            int parsedUserId = Integer.parseInt(userId);
-            return mClientManager.requestAuthorization(clientId, parsedUserId);
-        } catch(NumberFormatException e) {
-            return ResponseUtil.createServerErrorResponse(e.getMessage());
-        }
+    public AuthumResponse requestAuthorizationByUserId(@PathVariable("clientId") String clientId, @PathVariable("userId") int userId) {
+        return mClientManager.requestAuthorization(clientId, userId);
     }
 
     @RequestMapping(
-            value = "/{clientId}/user/{userEmail}/auth",
+            value = "/{clientId}/user/email/{userEmail}/auth",
             method = RequestMethod.GET
     )
     public AuthumResponse requestAuthorizationByUserEmail(@PathVariable("clientId") String clientId, @PathVariable("userEmail") String userEmail) {

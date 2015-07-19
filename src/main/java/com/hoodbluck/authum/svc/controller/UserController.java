@@ -57,14 +57,9 @@ public class UserController {
             value = "/{userId}/deviceToken",
             method = RequestMethod.POST
     )
-    public AuthumResponse updateDeviceToken(@PathVariable("userId") String userId,
+    public AuthumResponse updateDeviceToken(@PathVariable("userId") int userId,
                                 @RequestParam("deviceToken") String deviceToken) {
-        try {
-            int parsedUserId = Integer.parseInt(userId);
-            return mUserManager.updateUserDeviceToken(parsedUserId, deviceToken);
-        } catch(NumberFormatException e) {
-            return ResponseUtil.createServerErrorResponse(e.getMessage());
-        }
+        return mUserManager.updateUserDeviceToken(userId, deviceToken);
     }
 
     @RequestMapping(
@@ -78,30 +73,20 @@ public class UserController {
             value = "/{userId}/notify",
             method = RequestMethod.GET
     )
-    public String notifyUser(@PathVariable("userId") String userId) {
-        try {
-            int parsedUserId = Integer.parseInt(userId);
-            return mNotificationManager.notifyUser(parsedUserId, "This is a test message from Authum!");
-        } catch(NumberFormatException e) {
-            return e.getMessage();
-        }
+    public String notifyUser(@PathVariable("userId") int userId) {
+        return mNotificationManager.notifyUser(userId, "This is a test message from Authum!");
     }
 
     @RequestMapping(
             value = "/{userId}/client/{clientId}/auth",
             method = RequestMethod.POST
     )
-    public void respondAuthorizationByUserId(@PathVariable("userId") String userId, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
-        try {
-            int parsedUserId = Integer.parseInt(userId);
-            mUserManager.respondAuthorization(parsedUserId, clientId, authorized);
-        } catch(NumberFormatException e) {
-            //NOP
-        }
+    public void respondAuthorizationByUserId(@PathVariable("userId") int userId, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
+        mUserManager.respondAuthorization(userId, clientId, authorized);
     }
 
     @RequestMapping(
-            value = "/{userEmail}/client/{clientId}/auth",
+            value = "/email/{userEmail}/client/{clientId}/auth",
             method = RequestMethod.POST
     )
     public void respondAuthorizationByUserEmail(@PathVariable("userEmail") String userEmail, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
