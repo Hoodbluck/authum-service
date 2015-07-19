@@ -6,6 +6,7 @@ import com.hoodbluck.authum.svc.manager.UserManager;
 import com.hoodbluck.authum.svc.model.AuthumResponse;
 import com.hoodbluck.authum.svc.model.User;
 import com.hoodbluck.authum.svc.util.ResponseUtil;
+import com.hoodbluck.authum.svc.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -78,18 +79,20 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/{userId}/client/{clientId}/auth",
+            value = "/{userId}/client/{clientId}/auth/{authorized}",
             method = RequestMethod.POST
     )
-    public void respondAuthorizationByUserId(@PathVariable("userId") int userId, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
-        mUserManager.respondAuthorization(userId, clientId, authorized);
+    public void respondAuthorizationByUserId(@PathVariable("userId") int userId, @PathVariable("clientId") String clientId, @PathVariable("authorized") String authorized) {
+        boolean authorizedB = StringHelper.equals(authorized, "1");
+        mUserManager.respondAuthorization(userId, clientId, authorizedB);
     }
 
     @RequestMapping(
-            value = "/email/{userEmail}/client/{clientId}/auth",
+            value = "/email/{userEmail}/client/{clientId}/auth/{authorized}",
             method = RequestMethod.POST
     )
-    public void respondAuthorizationByUserEmail(@PathVariable("userEmail") String userEmail, @PathVariable("clientId") String clientId, @RequestParam("authorized") boolean authorized) {
-        mUserManager.respondAuthorization(userEmail, clientId, authorized);
+    public void respondAuthorizationByUserEmail(@PathVariable("userEmail") String userEmail, @PathVariable("clientId") String clientId, @PathVariable("authorized") String authorized) {
+        boolean authorizedB = StringHelper.equals(authorized, "1");
+        mUserManager.respondAuthorization(userEmail, clientId, authorizedB);
     }
 }
