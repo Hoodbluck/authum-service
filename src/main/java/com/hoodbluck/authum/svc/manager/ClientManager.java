@@ -37,7 +37,7 @@ public class ClientManager {
     /**
      * Requests authorization for the given user in the specified client.
      * @param userEmail the userId of the requesting for authorization
-     * @return an AuthumResponse for the requestion authorization.
+     * @return an AuthumResponse for the requested authorization.
      */
     public AuthumResponse requestAuthorization(String clientId, String userEmail) {
         User user = mUserDataProvider.getUser(userEmail);
@@ -52,7 +52,7 @@ public class ClientManager {
     /**
      * Requests authorization for the given user in the specified client.
      * @param userId the userId of the requesting for authorization
-     * @return an AuthumResponse for the requestion authorization.
+     * @return an AuthumResponse for the requested authorization.
      */
     public AuthumResponse requestAuthorization(String clientId, int userId) {
         User user = mUserDataProvider.getUser(userId);
